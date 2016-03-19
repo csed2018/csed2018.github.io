@@ -7,24 +7,25 @@ var DAY = 86400000;
 var now = new Date();
 var tomorrow_date = new Date(now.getTime() + DAY);
 var week_date = new Date(now.getTime() + 7*DAY);
-
+var WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 function is_active(d){                
     var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
     return (arg.getTime() > now.getTime());
 }
 
 function in_this_week(d){
-    var arg = new Date(d.year, d.month, d.day, d.hours, 0, 0, 0);
+    var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
     return (arg.getTime() > now.getTime() && arg.getTime() <= week_date.getTime());
 }
 
 function in_tomorrow(d){
-    var arg = new Date(d.year, d.month, d.day, d.hours, 0, 0, 0);
+    var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
     return (arg.getTime() > now.getTime() && arg.getTime() <= tomorrow_date.getTime());
 }
 
 function getDate(d){
-    return d.day + "/" + (d.month+1) + "/" + d.year + " - " + d.hours + ":" + ("0" + d.minutes).slice(-2);
+    var date = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
+    return " " + WEEK_DAYS[date.getDay()] + " - " + d.day + "/" + (d.month+1) + "/" + d.year + " - " + d.hours + ":" + ("0" + d.minutes).slice(-2);
 }
 
 function my_parse(arr){
@@ -78,7 +79,11 @@ function display_number(divID, arr){
     element.innerHTML = num;
 }
 
-function display_active(){
+
+function display_active_timeline(){
+    document.getElementById("active_list_header").innerHTML = " Timeline ";
+    var element = document.getElementById("active_list");
+    element.innerHTML = "<ul id = \"active_timeline\" class=\"timeline\"></ul>";
     display_list("active_timeline", active, function(item, index){
             var inverted = "";
             if(index%2 == 1){
@@ -104,6 +109,25 @@ function display_active(){
         });
 }
 
+function display_active_table(){
+    document.getElementById("active_list_header").innerHTML = " Table ";
+    var element = document.getElementById("active_list");
+    element.innerHTML = "<table class=\"table table-striped table-bordered table-hover\">\
+                            <thead>\
+                                <tr>\
+                                    <th>Subject</th>\
+                                    <th>Title</th>\
+                                    <th>deadline</th>\
+                                    <th>description</th>\
+                                </tr>\
+                            </thead>\
+                            <tbody id = \"active_table_body\"></tbody>\
+                        </table>";
+    display_list("active_table_body", active, function(item, index){
+            return "<tr id=\"as"+index+"\"><td>" + item.subject + "</td><td>" + item.title + "</td><td>" + getDate(item.date) + "</td><td>" + item.description +  "</td></tr>";
+        });
+}
+
 function display_recent(arr, header){
     var element = document.getElementById("recent_list_header");
     element.innerHTML = header;
@@ -111,7 +135,7 @@ function display_recent(arr, header){
         var text1 = "<a href=\"#as"+item.index+"\" class=\"list-group-item\"> <i class=\"fa fa-tasks fa-fw\"></i>";
         var text2 = "<span class=\"pull-right text-muted small\"><em>";
         var text3 = "</em></span></a>";
-        return text1 + item.title + text2 + getDate(item.date) + text3;
+        return text1 + "[" + item.subject + "] " + item.title + text2 + getDate(item.date) + text3;
     });
 }
 
@@ -140,6 +164,6 @@ function display(){
     display_number("tomorrow_number", tomorrow);
     display_number("past_number", past);
     display_recent(this_week, "Week Assignments");
-    display_active();
+    display_active_table();
     display_past();
 }

@@ -179,9 +179,22 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-clock-o fa-fw"></i> Active Assignmets Timeline
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button aria-expanded="false" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        <span id = "active_list_header"> Table </span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:display_active_table();"> Table </a>
+                                        </li>
+                                        <li><a href="javascript:display_active_timeline();"> Timeline </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div id = "active_list" class="panel-body">
                             <ul id = "active_timeline" class="timeline">
                                 loading
                             </ul>
@@ -251,7 +264,7 @@
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <!-- <script src="../dist/js/sb-admin-2.js"></script> -->
     
     <script src="../js/my_functions.js"></script>
     <script src="../js/json-request.js"></script>
