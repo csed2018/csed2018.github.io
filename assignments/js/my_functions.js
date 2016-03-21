@@ -22,11 +22,11 @@ function in_tomorrow(arg){
 }
 
 function getDate(d){
-    return " " + WEEK_DAYS[d.getDay()] + " - " + d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getYear() + " - " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
+    return " " + WEEK_DAYS[d.getDay()] + " - " + d.getDate() + "/" + (d.getMonth()+1) + " - " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
 }
 
 function my_parse(arr){
-    console.log("start filtering the array");
+    // console.log("start filtering the array");
     var i;
     for(i = 0; i < arr.length; i++) {
         if (is_active(arr[i].date)){
