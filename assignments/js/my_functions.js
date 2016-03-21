@@ -7,7 +7,7 @@ var DAY = 86400000;
 var now = new Date();
 var tomorrow_date = new Date(now.getTime() + DAY);
 var week_date = new Date(now.getTime() + 6*DAY);
-var WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+var WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function is_active(arg){
     return (arg.getTime() > now.getTime());
