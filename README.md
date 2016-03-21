@@ -8,19 +8,14 @@ Alexandria University CSED 2018 website source code
 
 This site still under developing:
 
-- currntly we don't use any data base to store data, instead data is sotred in a github repository:
-https://raw.githubusercontent.com/HazemSamir/data/master/data.js
+- currntly we don't use any data base to store data, instead data is read from googledocs using json API:
+https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/od6/public/values?alt=json-in-script&callback=parseGDOCS
 
 --------------------------------------------------
 
 Todo:
-- develop a github client app that:
-    - create a local repository from data repository : https://github.com/HazemSamir/data/
-    - pull the latest updates from it.
-    - parse json data and display it in a table that allows (adding new row, deleting or editing existing row).
-    - commit and push updates to the repositpry again.
-    
 - add a section for tables (mid-term table, final table, lectures ...)
+- add down counter.
 
 
 --------------------------------------------------
