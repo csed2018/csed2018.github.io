@@ -6,26 +6,23 @@ var tomorrow = [];
 var DAY = 86400000;
 var now = new Date();
 var tomorrow_date = new Date(now.getTime() + DAY);
-var week_date = new Date(now.getTime() + 7*DAY);
-var WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-function is_active(d){                
-    var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
+var week_date = new Date(now.getTime() + 6*DAY);
+var WEEK_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function is_active(arg){
     return (arg.getTime() > now.getTime());
 }
 
-function in_this_week(d){
-    var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
+function in_this_week(arg){
     return (arg.getTime() > now.getTime() && arg.getTime() <= week_date.getTime());
 }
 
-function in_tomorrow(d){
-    var arg = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
+function in_tomorrow(arg){
     return (arg.getTime() > now.getTime() && arg.getTime() <= tomorrow_date.getTime());
 }
 
 function getDate(d){
-    var date = new Date(d.year, d.month, d.day, d.hours, d.minutes, 0, 0);
-    return " " + WEEK_DAYS[date.getDay()] + " - " + d.day + "/" + (d.month+1) + "/" + d.year + " - " + d.hours + ":" + ("0" + d.minutes).slice(-2);
+    return " " + WEEK_DAYS[d.getDay()] + " - " + d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getYear() + " - " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
 }
 
 function my_parse(arr){
@@ -40,8 +37,8 @@ function my_parse(arr){
     }
 
     active.sort(function(a, b){
-        var aDate = new Date(a.date.year, a.date.month, a.date.day, a.date.hours, a.date.minutes, 0, 0);
-        var bDate = new Date(b.date.year, b.date.month, b.date.day, b.date.hours, b.date.minutes, 0, 0);
+        var aDate = a.date;
+        var bDate = b.date;
         return (aDate.getTime() - bDate.getTime());
     });
     
@@ -57,8 +54,8 @@ function my_parse(arr){
     }
     
     past.sort(function(a,b){
-        var aDate = new Date(a.date.year, a.date.month, a.date.day, a.date.hours, a.date.minutes, 0, 0);
-        var bDate = new Date(b.date.year, b.date.month, b.date.day, b.date.hours, b.date.minutes, 0, 0);
+        var aDate = a.date;
+        var bDate = b.date;
         return (bDate.getTime() - aDate.getTime());
     });
 }
@@ -117,8 +114,8 @@ function display_active_table(){
                                 <tr>\
                                     <th>Subject</th>\
                                     <th>Title</th>\
-                                    <th>deadline</th>\
-                                    <th>description</th>\
+                                    <th>Deadline</th>\
+                                    <th>Description</th>\
                                 </tr>\
                             </thead>\
                             <tbody id = \"active_table_body\"></tbody>\
