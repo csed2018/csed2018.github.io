@@ -1,4 +1,4 @@
-## csed2018 website
+# csed2018 website
 
 ###Alexandria University CSED(Computer and System Engineering Department) website source code.
 
@@ -13,9 +13,9 @@ more info :
   - [stackoverflow](http://stackoverflow.com/questions/23641492/google-docs-spreadsheet-to-json)
   - [google documentation](https://developers.google.com/gdata/samples/spreadsheet_sample)
 
-- We use Template from [Start Bootstrap](http://startbootstrap.com/) called [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/) [more info](https://github.com/HazemSamir/csed2018site/blob/master/assignments/README.md).
+- We use Template from [Start Bootstrap](http://startbootstrap.com/) called [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/), for more info [please read](https://github.com/HazemSamir/csed2018site/blob/master/assignments/README.md).
 
-- All code run on client side (fron end) and there is no backend code till now.
+- All code run on client side [frontend] and there is no backend code till now.
 
 
 -------------------------------------------------
