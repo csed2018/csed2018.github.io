@@ -9,6 +9,8 @@ var tomorrow_date = new Date(now.getTime() + DAY);
 var week_date = new Date(now.getTime() + 6*DAY);
 var WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+console.log("tommorrow : " + tomorrow_date);
+
 function is_active(arg){
     return (arg.getTime() > now.getTime());
 }

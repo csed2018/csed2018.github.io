@@ -8,9 +8,9 @@ function parseGDOCS(json){
         row.title = dataEntryArr[i].gsx$title.$t;
         row.date = new Date(dataEntryArr[i].gsx$date.$t + "T" + dataEntryArr[i].gsx$time.$t);
         row.description = dataEntryArr[i].gsx$description.$t;
-        row.description = row.description.replace("{{", "<a href=\"");
-        row.description = row.description.replace("#$", "\">");
-        row.description = row.description.replace("}}", "</a>");
+        row.description = row.description.replace(/{{/g, "<a href=\"");
+        row.description = row.description.replace(/\#\$/g, "\">");
+        row.description = row.description.replace(/}}/g, "</a>");
         simpleArr.push(row);
     }
     my_parse(simpleArr);
