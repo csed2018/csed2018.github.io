@@ -6,7 +6,7 @@ function parseGDOCS(json){
         var row = {};
         row.subject = dataEntryArr[i].gsx$subject.$t;
         row.title = dataEntryArr[i].gsx$title.$t;
-        row.date = new Date(dataEntryArr[i].gsx$date.$t + "T" + dataEntryArr[i].gsx$time.$t);
+        row.date = new Date(dataEntryArr[i].gsx$date.$t + "T" + dataEntryArr[i].gsx$time.$t + "Z");
         row.description = dataEntryArr[i].gsx$description.$t;
         row.description = row.description.replace(/{{/g, "<a href=\"");
         row.description = row.description.replace(/\#\$/g, "\">");
