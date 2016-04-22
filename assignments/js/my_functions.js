@@ -176,8 +176,10 @@ function display_past(){
 
 var prevActiveAssignment;
 function glowActiveAssignment (index) {
-    if (prevActiveAssignment != null) {
+    try{
         prevActiveAssignment.className = "";
+    } catch (err) {
+        prevActiveAssignment = null;
     }
     prevActiveAssignment = document.getElementById("as" + index);
     prevActiveAssignment.className = "tr_glow";
