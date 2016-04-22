@@ -4,22 +4,21 @@ var this_week = [];
 var tomorrow = [];
 
 var DAY = 86400000;
+var WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                 "Friday", "Saturday"];
 var now = new Date();
 var tomorrow_date = new Date(now.getTime() + DAY);
 var week_date = new Date(now.getTime() + 6*DAY);
-var WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-console.log("tommorrow : " + tomorrow_date);
-
-function is_active(arg){
+function isActive(arg){
     return (arg.getTime() > now.getTime());
 }
 
-function in_this_week(arg){
+function inThisWeek(arg){
     return (arg.getTime() > now.getTime() && arg.getTime() <= week_date.getTime());
 }
 
-function in_tomorrow(arg){
+function inTomorrow(arg){
     return (arg.getTime() > now.getTime() && arg.getTime() <= tomorrow_date.getTime());
 }
 
@@ -31,7 +30,7 @@ function my_parse(arr){
     // console.log("start filtering the array");
     var i;
     for(i = 0; i < arr.length; i++) {
-        if (is_active(arr[i].date)){
+        if (isActive(arr[i].date)){
             active.push(arr[i]);
         } else {
             past.push(arr[i]);
@@ -43,18 +42,18 @@ function my_parse(arr){
         var bDate = b.date;
         return (aDate.getTime() - bDate.getTime());
     });
-    
+
     // filter tommorow and this week tasks
     for(i=0; i < active.length; i++){
-        if(in_this_week(active[i].date)){
+        if(inThisWeek(active[i].date)){
             active[i].index = i;
             this_week.push(active[i]);
-            if(in_tomorrow(active[i].date)){
+            if(inTomorrow(active[i].date)){
                 tomorrow.push(active[i]);
             }
         }
     }
-    
+
     past.sort(function(a,b){
         var aDate = a.date;
         var bDate = b.date;
@@ -96,16 +95,17 @@ function display_active_timeline(){
                                     <h4 class=\"timeline-title\">"; // title
             var text2 =             "</h4>\
                                     <p><small class=\"text-muted\"><i class=\"fa fa-clock-o\"></i>"; // deadline
-            var text3 =            "</small> \
-                                    </p> \
+            var text3 =            "</small> --\
+                                    <small class=\"text-muted\" id = \"dc"+index+"\"></small></p> \
                                 </div> \
                                 <div class=\"timeline-body\"><p>" // description;
             var text4 = "          </p>\
                                 </div>\
                             </div>\
                         </li>";
-            return text1 + "[" + item.subject + "] " + item.title + text2 + getDate(item.date) + text3 + item.description + text4;
+            return text1 + "[" + item.subject + "] " + item.title + text2 + getDate(item.date) + "" + text3 + item.description + text4;
         });
+    updateActiveAssignmentsCounters();
 }
 
 function display_active_table(){
@@ -123,20 +123,29 @@ function display_active_table(){
                             <tbody id = \"active_table_body\"></tbody>\
                         </table>";
     display_list("active_table_body", active, function(item, index){
-            return "<tr id=\"as"+index+"\"><td>" + item.subject + "</td><td>" + item.title + "</td><td>" + getDate(item.date) + "</td><td>" + item.description +  "</td></tr>";
-        });
+            return "<tr id=\"as"+index+"\">\
+                       <td>" + item.subject + "</td>\
+                       <td>" + item.title + "</td>\
+                       <td>" + getDate(item.date) +
+                           "<h6 style=\"color:grey;\" id=\"dc"+ index + "\"></h6> </td>\
+                       <td>" + item.description +  "</td>\
+                   </tr>";
+         });
+    updateActiveAssignmentsCounters();
 }
 
 function display_recent(arr, header){
     var element = document.getElementById("recent_list_header");
     element.innerHTML = header;
     display_list("recent_list", arr, function(item, index){
-        var text1 = "<a href=\"#as"+item.index+"\" class=\"list-group-item\"> <i class=\"fa fa-tasks fa-fw\"></i>";
+        var text1 = "<a href=\"#as"+item.index+"\" onClick = \"glowActiveAssignment(" + index + ")\" class=\"list-group-item\"> <i class=\"fa fa-tasks fa-fw\"></i>";
         var text2 = "<span class=\"pull-right text-muted small\"><em>";
         var text3 = "</em></span></a>";
         return text1 + "[" + item.subject + "] " + item.title + text2 + getDate(item.date) + text3;
     });
 }
+
+
 
 function display_past(){
     display_list("past_list", past, function(item, index){
@@ -156,6 +165,37 @@ function display_past(){
     });
 }
 
+var prevActiveAssignment;
+function glowActiveAssignment (index) {
+    if (prevActiveAssignment != null) {
+        prevActiveAssignment.className = "";
+    }
+    prevActiveAssignment = document.getElementById("as" + index);
+    prevActiveAssignment.className = "tr_glow";
+}
+
+function displayActiveCounter(index, date) {
+    var element = document.getElementById("dc"+index);
+    if (element != null) {
+        if (date.major == 0)
+            element.innerHTML = date.minor + " " + date.minorString + " remains";
+        else
+            element.innerHTML = date.major + " " + date.majorString + " remains";
+    }
+}
+
+function displayMainEvent(event) {
+    var element = document.getElementById("dc00");
+    if(event == null) {
+        element.innerHTML = "";
+    } else {
+        document.getElementById('dc00major').innerHTML = event.major;
+        document.getElementById('dc00minor').innerHTML = event.minor;
+        document.getElementById('dc00majorlabel').innerHTML = event.majorString;
+        document.getElementById('dc00minorlabel').innerHTML = event.minorString;
+        document.getElementById('dc00caption').innerHTML = mainEvent.caption;
+    }
+}
 
 function display(){
     display_number("active_number", active);
@@ -163,6 +203,10 @@ function display(){
     display_number("tomorrow_number", tomorrow);
     display_number("past_number", past);
     display_recent(this_week, "Week Assignments");
-    display_active_table();
+    if(Math.floor((new Date()).getTime()/100)%2 == 0)
+        display_active_table();
+    else
+        display_active_timeline();
+
     display_past();
 }
