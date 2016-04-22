@@ -38,7 +38,7 @@
 
     <style>
         .tr_glow {
-            box-shadow: inset 0 0 10px #FF0000;
+            box-shadow: inset 0 0 10px green;
         }
     </style>
 
@@ -74,7 +74,19 @@
                             <a href="contribute.html"><i class="fa fa-github-square fa-fw"></i> Contribute</a>
                         </li>
                     </ul>
-                </div>
+                </div class="sidebar-nav navbar-collapse">
+                <br><br><br><br><br><br><br><br>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center"><i class="fa fa-check"></i> Tip</h2>
+                        <p class="text-center">
+
+                            click on any item in the list of <span id = "tip_recent_list">Week Assignments</span>
+                            to see its place in Active Assignments <span id = "tip_active_list">Table</span>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
@@ -213,9 +225,10 @@
                 <div class="col-lg-4">
                     <div id="dc00" name="downcounter" >
                         <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span id="dc00caption" style="font-size:150%"></span>
+                            </div>
                             <div class="panel-body">
-                                <span id="dc00caption" style="font-size:200%" class="text-left">
-                                </span>
                                 <p class="text-center">
                                     <span id="dc00major" style="font-size:300%"></span> <span id="dc00majorlabel"></span>
                                     <span style="font-size:400%"> : </span>

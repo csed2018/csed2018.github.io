@@ -79,6 +79,9 @@ function display_number(divID, arr){
 
 
 function display_active_timeline(){
+    try {
+        document.getElementById("tip_active_list").innerHTML = "Timeline";
+    } catch (err){}
     document.getElementById("active_list_header").innerHTML = " Timeline ";
     var element = document.getElementById("active_list");
     element.innerHTML = "<ul id = \"active_timeline\" class=\"timeline\"></ul>";
@@ -109,6 +112,9 @@ function display_active_timeline(){
 }
 
 function display_active_table(){
+    try {
+        document.getElementById("tip_active_list").innerHTML = "Table";
+    } catch (err){}
     document.getElementById("active_list_header").innerHTML = " Table ";
     var element = document.getElementById("active_list");
     element.innerHTML = "<table class=\"table table-striped table-bordered table-hover\">\
@@ -135,6 +141,9 @@ function display_active_table(){
 }
 
 function display_recent(arr, header){
+    try {
+        document.getElementById("tip_recent_list").innerHTML = header;
+    } catch (err){}
     var element = document.getElementById("recent_list_header");
     element.innerHTML = header;
     display_list("recent_list", arr, function(item, index){
