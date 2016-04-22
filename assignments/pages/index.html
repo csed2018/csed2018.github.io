@@ -35,7 +35,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
+    <style>
+        .tr_glow {
+            box-shadow: inset 0 0 10px #FF0000;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -60,7 +66,7 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -205,6 +211,20 @@
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
+                    <div id="dc00" name="downcounter" >
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <span id="dc00caption" style="font-size:200%" class="text-left">
+                                </span>
+                                <p class="text-center">
+                                    <span id="dc00major" style="font-size:300%"></span> <span id="dc00majorlabel"></span>
+                                    <span style="font-size:400%"> : </span>
+                                    <span id="dc00minor" style="font-size:300%"></span> <span id="dc00minorlabel"></span>
+                                </p>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="btn-group">
@@ -218,12 +238,12 @@
                                     </li>
                                 </ul>
                             </div>
-                                    
+
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div id="recent_list" class="list-group">
-                                
+
                             </div>
                             <!-- /.list-group -->
                         </div>
@@ -265,13 +285,15 @@
 
     <!-- Custom Theme JavaScript -->
     <!-- <script src="../dist/js/sb-admin-2.js"></script> -->
-    
+
     <script src="../js/my_functions.js"></script>
     <!-- <script src="../js/json-request.js"></script> -->
+    <script src="../js/down_counter.js"></script>
     <script src="../js/parse_google_docs.js"></script>
+    <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/ojorxse/public/values?alt=json-in-script&callback=parseEventsGDOCS"></script>
     <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/od6/public/values?alt=json-in-script&callback=parseGDOCS"></script>
-    
-    
+
+
 </body>
 
 </html>
