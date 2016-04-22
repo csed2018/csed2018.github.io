@@ -16,3 +16,22 @@ function parseGDOCS(json){
     my_parse(simpleArr);
     display();
 }
+
+function parseEventsGDOCS(json){
+    var dataEntryArr = json.feed.entry;
+    if(dataEntryArr != null) {
+        var i;
+        var nowTime = (new Date).getTime();
+        for(i = 0; i < dataEntryArr.length; i++) {
+            var event = {};
+            event.date = new Date(dataEntryArr[i].gsx$date.$t + "T" + dataEntryArr[i].gsx$time.$t + "Z");
+            event.caption = dataEntryArr[i].gsx$caption.$t
+            if(event.date.getTime() >= nowTime) {
+                mainEvent = event;
+                updateMainEvent();
+                return;
+            }
+        }
+    }
+    displayMainEvent(null);
+}
