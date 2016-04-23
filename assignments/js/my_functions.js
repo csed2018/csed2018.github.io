@@ -187,11 +187,15 @@ function glowActiveAssignment (index) {
 
 function displayActiveCounter(index, date) {
     var element = document.getElementById("dc"+index);
+    var remain = " remain" +
+                 (date.major > 1 || (date.major == 0 && date.minor > 1)
+                 ? ""
+                 : "s");
     if (element != null) {
         if (date.major == 0)
-            element.innerHTML = date.minor + " " + date.minorString + " remains";
+            element.innerHTML = date.minor + " " + date.minorString + remain;
         else
-            element.innerHTML = date.major + " " + date.majorString + " remains";
+            element.innerHTML = date.major + " " + date.majorString + remain;
     }
 }
 
