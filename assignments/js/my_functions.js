@@ -174,15 +174,16 @@ function display_past(){
     });
 }
 
-var prevActiveAssignment;
+var prevActiveAssignment, prevActiveAssignmentStyle;
 function glowActiveAssignment (index) {
     try{
-        prevActiveAssignment.className = "";
+        prevActiveAssignment.className = prevActiveAssignmentStyle;
     } catch (err) {
         prevActiveAssignment = null;
     }
     prevActiveAssignment = document.getElementById("as" + index);
-    prevActiveAssignment.className = "tr_glow";
+    prevActiveAssignmentStyle = prevActiveAssignment.className;
+    prevActiveAssignment.className = prevActiveAssignmentStyle + " tr_glow";
 }
 
 function displayActiveCounter(index, date) {
