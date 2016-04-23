@@ -22,8 +22,8 @@ more info :
 
 #####Todo:
 - add a section for tables (mid-term table, final table, lectures ...)
-- add down counter.
 - improve timeline style.
+- use jquery to manipulate html instead of native javascript methods.
 
 -------------------------------------------------
 
