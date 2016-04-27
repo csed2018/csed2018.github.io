@@ -25,7 +25,7 @@ function aproxDate (date) {
         [date.minutes, "minute"]
     ];
     var i = 0
-    for(; i < arr.length - 1; ++i) {
+    for(; i < arr.length - 2; ++i) {
         if (arr[i][0] > 0)
             break;
     }
