@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CSED 18 Assignments Dashboard</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Timeline CSS -->
+    <link href="../dist/css/timeline.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style>
+        .tr_glow {
+            box-shadow: inset 1px 1px 2px 2px red;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">CSED 18 Assignments [for those who procrastinate]</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <!-- /.navbar-top-links -->
+
+            <div class="nav navbar-right">
+                <!--#include virtual="/visitors/count.cgi?page=visits&type=text"-->
+            </div>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="contribute.html"><i class="fa fa-github-square fa-fw"></i> Contribute</a>
+                        </li>
+                    </ul>
+                </div class="sidebar-nav navbar-collapse">
+                <br><br><br><br><br><br><br><br>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <!-- <h2 class="text-center"><i class="fa fa-check"></i>Do You like The website</h2> -->
+                        <p class="text-center">
+                            Do you visit us regularly? <br>
+                            help with your <a href="http://goo.gl/q9eou4">feedback</a>
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <br><br><br>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center"><i class="fa fa-check"></i> Tip</h2>
+                        <p class="text-center">
+
+                            click on any item in the list of <span id = "tip_recent_list">Week Assignments</span>
+                            to see its place in Active Assignments <span id = "tip_active_list">Table</span> [works in firefox only].
+                        </p>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"> Dashboard</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-clock-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div id = "active_number" class="huge">0</div>
+                                    <div>Active Assignments</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#active_timeline">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-calendar fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div id = "week_number" class="huge">0</div>
+                                    <div>This Week</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:display_recent(this_week,&quot Week Assignments &quot);">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bell fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div id = "tomorrow_number" class="huge">0</div>
+                                    <div>Tomorrow</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:display_recent(tomorrow,&quot Tomorrow Assignments &quot);">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-history fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div id = "past_number" class="huge">0</div>
+                                    <div>Out-Dated</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#past_list">
+                            <div class="panel-footer">
+                                <span class="pull-left">View Details</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-clock-o fa-fw"></i> Active Assignmets Timeline
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button aria-expanded="false" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                        <span id = "active_list_header"> Table </span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="javascript:display_active_table();"> Table </a>
+                                        </li>
+                                        <li><a href="javascript:display_active_timeline();"> Timeline </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div id = "active_list" class="panel-body">
+                            <ul id = "active_timeline" class="timeline">
+                                loading
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div id="dc00" name="downcounter" >
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <span id="dc00caption" style="font-size:150%"></span>
+                            </div>
+                            <div class="panel-body">
+                                <p class="text-center">
+                                    <span id="dc00major" style="font-size:300%"></span> <span id="dc00majorlabel"></span>
+                                    <span style="font-size:400%"> : </span>
+                                    <span id="dc00minor" style="font-size:300%"></span> <span id="dc00minorlabel"></span>
+                                </p>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="btn-group">
+                                <button aria-expanded="false" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    <span id = "recent_list_header"> Tommorow Assignments </span> <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="javascript:display_recent(tomorrow,&quot Tomorrow Assignments &quot);"> Tomorrow Assignments</a>
+                                    </li>
+                                    <li><a href="javascript:display_recent(this_week,&quot Week Assignments &quot);"> Week Assignments </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="recent_list" class="list-group">
+
+                            </div>
+                            <!-- /.list-group -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                    <!-- /.panel -->
+                    <div class="chat-panel panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-history fa-fw"></i>
+                            Past Assignments
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <ul id = "past_list" class="chat">
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel .chat-panel -->
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <!-- <script src="../dist/js/sb-admin-2.js"></script> -->
+
+    <script src="../js/my_functions.js"></script>
+    <!-- <script src="../js/json-request.js"></script> -->
+    <script src="../js/down_counter.js"></script>
+    <script src="../js/parse_google_docs.js"></script>
+    <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/ojorxse/public/values?alt=json-in-script&callback=parseEventsGDOCS"></script>
+    <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/od6/public/values?alt=json-in-script&callback=parseGDOCS"></script>
+
+
+</body>
+
+</html>
