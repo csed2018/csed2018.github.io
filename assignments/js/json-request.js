@@ -6,7 +6,7 @@ xhr.onreadystatechange = function () {    // need eventhandler since our call is
     if ( xhr.readyState == 4 && xhr.status == 200 ) {  // check for success
         console.log("succeeded");
         console.log(xhr.responseText);
-        var jsonArr = JSON.parse(xhr.responseText);        
+        var jsonArr = JSON.parse(xhr.responseText);
         my_parse(jsonArr);
         display();
      }
