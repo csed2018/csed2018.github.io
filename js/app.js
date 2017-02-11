@@ -193,7 +193,7 @@ app.filter('unsafe', function($sce) {
 
 
 app.service('AssignmentsData', function($http, AssignmentsUtils){
-  $http.get('https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/ofm7p2y/public/values?alt=json', {})
+  $http.get('https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/oltjd19/public/values?alt=json', {})
   .then(function(response){
     var dataEntryArr = response.data.feed.entry;
     var simpleArr = [];
@@ -259,7 +259,7 @@ app.controller('nextDayCtrl', function($scope, TableData){
 app.service('TableData', function($http, TimeUtils) {
   var that = this;
   this.data = {table: []};
-  $http.get("https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/o4wjnp0/public/values?alt=json")
+  $http.get("https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/oxukpy2/public/values?alt=json")
     .then (function (response) {
       var dataEntryArr = response.data.feed.entry;
       if(dataEntryArr == null)

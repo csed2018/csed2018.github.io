@@ -1,17 +1,15 @@
-# csed2018 website
-
-###Alexandria University CSED(Computer and System Engineering Department) website source code.
+Alexandria University CSED (Computer and System Engineering Department) website source code.
 
 -------------------------------------------------
 
-####Assignments Dashboard Page
+Assignments Dashboard Page
 
-*still under developing:*
+still under developing:
 
-- currently we don't use any data base to store data, instead data is read from ~~json file on github [data.js](https://raw.githubusercontent.com/HazemSamir/data/master/data.js)~~ google docs spreedsheet using their API
-more info :
-  - [stackoverflow](http://stackoverflow.com/questions/23641492/google-docs-spreadsheet-to-json)
-  - [google documentation](https://developers.google.com/gdata/samples/spreadsheet_sample)
+- currently we don't use any data base to store data, instead data is read from google docs spreedsheet using their API. For more info :
+  - http://stackoverflow.com/questions/23641492/google-docs-spreadsheet-to-json
+  - https://developers.google.com/gdata/samples/spreadsheet_sample
+  - Getting sheet api: http://damolab.blogspot.qa/2011/03/od6-and-finding-other-worksheet-ids.html
 
 - This site built using BootStrap 3 and AngularJS.
 
@@ -20,4 +18,4 @@ more info :
 
 -------------------------------------------------
 
-You are welcome to contribute (fix bugs, suggest or add new features) please feel free to contact me (*Hazem Samir*)
+You are welcome to contribute (fix bugs, suggest or add new features) please feel free to issue or fork and pull request
