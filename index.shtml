@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CSED' 18</title>
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet">
+  
+  <script src="js/angular.min.js"></script>
+</head>
+
+<body ng-app="app">
+<!--#include virtual="/visitors/count.cgi?page=visits&type=text"-->
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">CSED'18 <small>for those who procrastinate</small></a>
+    </div>
+    <div class="">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a data-toggle="tab" href="#dashboard-container">Dashboard</a></li>
+        <li><a data-toggle="tab" href="#nextday-container">Next Day</a></li>
+      </ul>
+
+    </div>  
+  </div>
+</div>
+
+<div class="tab-content">
+
+<div class="tab-pane fade in active container" id="dashboard-container">
+
+  <div class="row" style="margin-top:20px">
+    <div class="col-md-8">
+      <div class="page-header">
+      <h1>
+        Dashboard
+      </h1>
+      </div>
+    </div>
+  </div>
+
+	<div class="row">
+    
+		<div class="col-md-8" ng-controller="assignmentsCtrl as ctrl">
+      <h2> Assingments </h2>
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="panel panel-success">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-clock-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div style="font-size: 350%">{{ctrl.data.activeCount}}</div>
+                            <div>Active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="panel panel-warning">
+                  <div class="panel-body panel-body-warning">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <span class="fa fa-calendar fa-5x"></span>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div style="font-size: 350%">{{ctrl.data.weekCount}}</div>
+                              <div>In 7 Days</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="panel panel-danger">
+                  <div class="panel-body panel-body-danger">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-bell fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div style="font-size: 350%">{{ctrl.data.dayCount}}</div>
+                              <div>In 24 Hours</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">    
+              <div class="panel panel-default">
+                  <div class="panel-body">
+                      <div class="row">
+                          <div class="col-xs-3">
+                              <i class="fa fa-history fa-5x"></i>
+                          </div>
+                          <div class="col-xs-9 text-right">
+                              <div style="font-size: 350%">{{ctrl.data.pastCount}}</div>
+                              <div>Past</div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div style="margin-top:20px"> </div>
+      
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" data-target="#active-subjects, #active-panel">Active</a></li>
+        <li><a data-toggle="tab" data-target="#past-subjects, #past-panel">Past</a></li>
+      </ul>
+      
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div>
+            filter by subject:
+            <div class="btn-group btn-group-xs tab-content" role="group">
+                <span id="active-subjects" class="tab-pane active">
+                  <button type="button" class="btn btn-default btn-xs" ng-repeat="(subject, count) in ctrl.data.subjects"
+                          ng-click="ctrl.setFilterSubject(subject)">
+                    {{subject}} <span class="badge">{{count.active}}</span>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.setFilterSubject(null)">
+                    remove filter
+                  </button>
+                </span>
+                <span id="past-subjects" class="tab-pane">
+                  <button type="button" class="btn btn-default btn-xs" ng-repeat="(subject, count) in ctrl.data.subjects"
+                          ng-click="ctrl.setFilterSubject(subject)">
+                    {{subject}} <span class="badge">{{count.past}}</span>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-xs" ng-click="ctrl.setFilterSubject(null)">
+                    remove filter
+                  </button>
+                </span>
+            </div>
+          </div>
+          
+        </div>
+        <div class="panel-body">
+          <small class="pull-right"> {{ ctrl.filterSubject? "showing " + ctrl.filterSubject + " only" : ""}}</small>
+          
+          <div class="tab-content">
+            <ul id="active-panel" class="tab-pane list-group active" style="margin-top:20px">
+              <li href="" class="list-group-item" style="margin-top:8px" ng-class="['list-group-item'+ctrl.panelClass(task)]" 
+                    ng-repeat="task in ctrl.data.active" 
+                    ng-show="ctrl.filterSubject==null || task.subject==ctrl.filterSubject">
+                
+                <h4 class="list-group-item-heading"> 
+                  [{{task.subject}}] {{task.title}} 
+                  <small class="pull-right">
+                    <span class="fa fa-clock-o"> </span> {{ task.deadline | date:"EEEE d/M h:mm a" }}
+                    -- {{ task.remainingTime }} {{ ctrl.isActive(task)? "remaining" : "ago" }}
+                  </small>
+                </h4>
+                <p class="list-group-item-text" ng-bind-html="task.description | scapeHyperLinks | scapeNewLines | unsafe"> </p>
+              </li>
+            </ul>
+            
+            <ul id="past-panel" class="tab-pane list-group" style="margin-top:20px">
+              <li href="" class="list-group-item" style="margin-top:8px" 
+                    ng-repeat="task in ctrl.data.past" 
+                    ng-show="ctrl.filterSubject==null || task.subject==ctrl.filterSubject">
+                
+                <h4 class="list-group-item-heading"> 
+                  [{{task.subject}}] {{task.title}} 
+                  <small class="pull-right">
+                    <span class="fa fa-clock-o"> </span> {{ task.deadline | date:"EEEE d/M h:mm a" }}
+                    -- {{ task.remainingTime }} {{ ctrl.isActive(task)? "remaining" : "ago" }}
+                  </small>
+                </h4>
+                <p class="list-group-item-text" ng-bind-html="task.description | scapeHyperLinks | scapeNewLines | unsafe"> </p> 
+              </li>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+		</div>
+		
+    <div class="col-md-4">
+			<h2>
+				Useful Stuff
+			</h2>
+      <div class="panel-group">
+        
+        <div class="panel panel-default" ng-controller="nextDayCtrl as ctrl">
+            <div class="panel-heading">
+                Final Exams (Period from 9 am to 12 pm)
+            </div>
+
+            <div class="panel-body">
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Subject</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td >Sunday 1/1/2017</td>
+                    <td>Non-linear Control</td>
+                  </tr>
+                  <tr>
+                    <td >Wednesday 4/1/2017</td>
+                    <td>OS</td>
+                  </tr>
+                  <tr>
+                    <td >Wednesday 11/1/2017</td>
+                    <td>Micro Processors</td>
+                  </tr>
+                  <tr>
+                    <td >Sunday 15/1/2017</td>
+                    <td>DSP</td>
+                  </tr>
+                  <tr>
+                    <td >Wednesday 18/1/2017</td>
+                    <td>HCI</td>
+                  </tr>
+                  <tr>
+                    <td >Saturday 21/1/2017</td>
+                    <td>Algorithms</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h5> TA's Emails for assignments deleivery: </h5>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    Eng.Rana for Control and OS:
+                    <a href="mailto:rana.momtaz@yahoo.com"> rana.momtaz@yahoo.com </a>
+                  </li>
+                  <li class="list-group-item">
+                    Eng.Omar for Algorithms:
+                    <a href="mailto:omarkhaledarafa@gmail.com"> omarkhaledarafa@gmail.com </a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+		</div>
+    </div>
+	</div>
+  
+  <div class="row">
+    <div class="navbar navbar-default navbar-fixed-bottom navbar-inverse" ng-controller="downCounetrCtrl as dctrl" ng-show="dctrl.event.isActive">
+      <div class="container" style="font-size: 130%">
+        <div class="navbar-header">
+          <div class="navbar-brand"> {{dctrl.event.caption}} </div>
+        </div>
+        <div class="navbar-text navbar-right">
+          <span> {{dctrl.event.remaining[0].value}} </span> <span>{{dctrl.event.remaining[0].label}}</span>
+          <span class="animate-flicker"> : </span>
+          <span> {{dctrl.event.remaining[1].value}} </span> <span>{{dctrl.event.remaining[1].label}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="container tab-pane fade in" id="nextday-container">
+  
+  <div class="row" style="margin-top:20px">
+    <div class="col-md-8">
+      <div class="page-header">
+      <h1>
+        Time Table
+      </h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-default" ng-controller="nextDayCtrl as ctrl">
+        <div class="panel-heading">
+            <i></i> Subjects Table
+            <label class="btn btn-default btn-xs pull-right"  data-toggle="button" ng-click="ctrl.allTableClick()">
+              show all Table
+            </label>
+        </div>
+
+        <div class="panel-body">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Period</th>
+                        <th>Subject</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="ctrl.isAllTableShowed() || period.isNextDay" ng-class="{info: period.isNextDay}" ng-repeat-start="period in ctrl.data.table">
+                        <td >{{ period.mid ? period.day : "" }}</td>
+                        <td>{{ period.num}}</td>
+                        <td>{{ period.subject }} ( {{ period.ptype }} )</td>
+                        <td>{{ period.notes || ""}}</td>
+                    </tr>
+                    <tr ng-show="ctrl.isAllTableShowed() && period.last" ng-repeat-end>
+                        <td></td><td></td> <td></td><td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.panel-body -->
+    </div>
+  </div>
+</div>
+
+
+</div> <!-- tab content -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
