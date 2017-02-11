@@ -4,8 +4,8 @@ var this_week = [];
 var tomorrow = [];
 
 var DAY = 86400000;
-var WEEK_DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-                 "Friday", "Saturday"];
+var WEEK_DAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                 "Friday"];
 var now = new Date();
 var tomorrow_date = new Date(now.getTime() + DAY);
 var week_date = new Date(now.getTime() + 6*DAY);
@@ -23,7 +23,7 @@ function inTomorrow(arg){
 }
 
 function getDate(d){
-    return " " + WEEK_DAYS[d.getDay()] + " - " + d.getDate() + "/" + (d.getMonth()+1) + " - " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
+    return " " + WEEK_DAYS[(d.getDay()+1)%7] + " - " + d.getDate() + "/" + (d.getMonth()+1) + " - " + d.getHours() + ":" + ("0" + d.getMinutes()).slice(-2);
 }
 
 function my_parse(arr){
@@ -160,7 +160,7 @@ function display_past(){
     display_list("past_list", past, function(item, index){
         var text1 = "<li class=\"left clearfix\">\
                         <span class=\"chat-img pull-left\">\
-                            <img src=\"http://placehold.it/50/55C1E7/fff\" alt=\"User Avatar\" class=\"img-circle\" />\
+                            <i class=\"fa fa-tasks fa-fw\" style=\"font-size:200%\"/></i>\
                         </span>\
                         <div class=\"chat-body clearfix\">\
                             <div class=\"header\">\

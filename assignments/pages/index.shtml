@@ -63,7 +63,7 @@
 
             <!-- /.navbar-top-links -->
 
-            <div class="nav navbar-right">
+            <div class="nav navbar-right" hidden="true">
                 <!--#include virtual="/visitors/count.cgi?page=visits&type=text"-->
             </div>
 
@@ -73,6 +73,11 @@
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+
+                        <li>
+                            <a href="next-day.html"><i class="fa fa-table fa-fw"></i> Next Day</a>
+                        </li>
+
                         <li>
                             <a href="contribute.html"><i class="fa fa-github fa-fw"></i> Contribute</a>
                         </li>
@@ -321,7 +326,7 @@
     <script src="../js/down_counter.js"></script>
     <script src="../js/parse_google_docs.js"></script>
     <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/ojorxse/public/values?alt=json-in-script&callback=parseEventsGDOCS"></script>
-    <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/od6/public/values?alt=json-in-script&callback=parseGDOCS"></script>
+    <script src="https://spreadsheets.google.com/feeds/list/1pBZaLcIZ8o2t6HoylMwun4EranZF4i2KvFoG5OmtNio/ofm7p2y/public/values?alt=json-in-script&callback=parseGDOCS"></script>
 
 
 </body>
