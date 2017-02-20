@@ -269,15 +269,13 @@ app.service('TableData', function($http, TimeUtils) {
       for(var i = 0; i < dataEntryArr.length; i++) {
           var period = {};
           period.day = dataEntryArr[i].gsx$day.$t;
-          period.enabled = dataEntryArr[i].gsx$enabled.$t === "fakss" ? false : true;
           period.num = Number(dataEntryArr[i].gsx$period.$t);
           period.subject = dataEntryArr[i].gsx$subject.$t;
           period.ptype = dataEntryArr[i].gsx$type.$t;
           period.notes = dataEntryArr[i].gsx$note.$t;
           var isNextDay = dataEntryArr[i].gsx$confirmed.$t;
 
-          if (period.day && period.enabled && period.num && period.subject &&
-              period.ptype) {
+          if (period.day && period.num && period.subject && period.ptype) {
               period.dayID = TimeUtils.getDayID(period.day);
               period.notes = period.notes;
               period.isNextDay = (isNextDay === "nextDay");
