@@ -31,6 +31,11 @@ app.service('TimeUtils', function(){
     return (date > Date.now());
   }
   
+  this.tomorrowMidNight = function() {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2);
+  }
+  
   this.deltaNow = function(date) {
     return date - Date.now();
   }
@@ -40,7 +45,7 @@ app.service('TimeUtils', function(){
   }
   
   this.inDay = function(d){  
-    return that.isAhead(d) && that.deltaNow(d) < that.DAY;
+    return that.isAhead(d) && d < that.tomorrowMidNight();
   }
   
   this.millisecondsToUnits = function(time) {
@@ -227,6 +232,14 @@ app.controller('assignmentsCtrl', function($scope,
   
   this.isActive = function (a) {
     return TimeUtils.isAhead(a.deadline);
+  }
+  
+  this.inDay = function(task) {
+    return TimeUtils.inDay(task.deadline);
+  }
+  
+  this.inWeek = function(task) {
+    return TimeUtils.inWeek(task.deadline);
   }
   
   this.panelClass = function(task) {
