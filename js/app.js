@@ -324,6 +324,7 @@ app.service('DownCounterService', function($http, TimeUtils, $timeout){
       var nowTime = (new Date).getTime();
       for(var i = 0; i < dataEntryArr.length; i++) {
         var date = new Date(dataEntryArr[i].gsx$date.$t + "T" + dataEntryArr[i].gsx$time.$t + "Z");
+        date = new Date(date - 7200000);
         var caption = dataEntryArr[i].gsx$caption.$t;
         if(TimeUtils.isAhead(date)) {
           that.mainEvent.date = date;
